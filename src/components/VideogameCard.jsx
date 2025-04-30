@@ -8,7 +8,7 @@ export default function VideogameCard({data}) {
           {data.results.map((game) => (
             <li key={game.id} className="card">
               <h2>{game.name}</h2>
-              <p>Rating: {game.metacritic}</p>
+              <p>Rating: {game.rating}</p>
               <p>Released: {game.released}</p>
               <img src={game.background_image} alt={game.name} />
             </li>
