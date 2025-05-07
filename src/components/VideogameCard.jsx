@@ -24,7 +24,7 @@ export default function VideogameCard({ data }) {
               >
                 <div className={`flip-card-inner ${flippedCards[game.id] ? 'flipped' : ''}`}>
                   <div className="flip-card-front">
-                    <h2>{game.name}</h2>
+                    <h3>{game.name}</h3>
                     <img src={game.background_image} alt={game.name} />
                   </div>
                   <div className="flip-card-back">

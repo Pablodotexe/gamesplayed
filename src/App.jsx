@@ -2,8 +2,15 @@ import { useEffect, useState } from 'react'
 import VideogameCard from './components/VideogameCard';
 import Button from './components/Button';
 import SelectOption from './components/SelectOption';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignUp from './components/pages/SignUp';
+import SignIn from './components/pages/SignIn';
+import RegisterForm from './components/SignUpForm'; 
+
 
 import './App.css'
+import Navbar from './components/Navbar';
+
 
 
 function App() {
@@ -52,16 +59,23 @@ function App() {
     
 
 
-  return (
-    <div className="App">
-      <h1>Videogames played</h1>
-      
-      <SelectOption onChange={handleOptionChange}/>
-      <Button handleClick={handleButtonClick}/>
-      <VideogameCard data={data}/>
-      
+    return (
+      <div className="App">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <h1>Videogames played</h1>
+            <SelectOption onChange={handleOptionChange} />
+            <Button handleClick={handleButtonClick} />
+            <VideogameCard data={data} />
+          </>
+        } />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
     </div>
-  );
+    );
 }
 
 
