@@ -1,10 +1,10 @@
-import RegisterForm from '../SignUpForm';
+import SignInForm from "../SignInForm";
 
 function SignIn() {
   return (
     <div>
       <h2>Sign In</h2>
-      <RegisterForm />
+      <SignInForm />
     </div>
   );
 }

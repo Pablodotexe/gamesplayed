@@ -1,7 +1,30 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { doc, setDoc, arrayUnion } from "firebase/firestore";
+
+async function agregarJuegoPorAño(juego, año) {
+  const user = auth.currentUser;
+  if (!user) {
+    alert("El usuario no ha iniciado sesión.");
+    return;
+  }
+
+  const ref = doc(db, "USERS", user.uid, "gamesByYear", año.toString());
+
+  try {
+    await setDoc(ref, {
+      games: arrayUnion(juego)
+    }, { merge: true });  // 'merge: true' conserva juegos anteriores si ya existen
+
+    console.log(`Juego "${juego}" guardado para el año ${año}.`);
+  } catch (error) {
+    console.error("Error al guardar el juego:", error);
+  }
+}
+
+
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,5 +48,6 @@ const app = initializeApp(firebaseConfig);
 // Exporta Firestore
 const db = getFirestore(app);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-export { db, auth };
+export { db, auth, provider, agregarJuegoPorAño };

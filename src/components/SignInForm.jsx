@@ -1,7 +1,7 @@
-// src/components/RegisterForm.jsx
+// src/components/SignInForm.jsx
 import { useState } from "react";
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function SignInForm() {
   const [email, setEmail] = useState("");
@@ -9,41 +9,36 @@ function SignInForm() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
 
-  const handleRegister = async () => {
+  const handleSignIn = async () => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
       setError("");
-      console.log("Usuario registrado:", userCredential.user);
+      console.log("Usuario autenticado:", userCredential.user);
     } catch (error) {
       setError(error.message);
-      console.error("Error registrando usuario:", error.message);
+      console.error("Error al iniciar sesión:", error.message);
     }
   };
 
   return (
-
-  
-
-      <div className="form-container">
-
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={handleRegister}>Registrarse</button>
-        {user && <p>Usuario registrado: {user.email}</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-      </div>
-   
+    <div className="form-container">
+      <input
+        type="email"
+        placeholder="Correo electrónico"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleSignIn}>Iniciar sesión</button>
+      {user && <p>Bienvenido: {user.email}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+    </div>
   );
 }
 

@@ -211,3 +211,8 @@ button:active {
 .form-container button {
   width: 100%;
 }
+
+.logOutButton{
+  background-color:rgba(223, 20, 20, 0.808);
+  max-height: 75%;
+}
