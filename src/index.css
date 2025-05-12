@@ -20,10 +20,6 @@
   text-align: center;
 }
 
-
-
-
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -119,7 +115,7 @@ button:active {
 
 .flip-card {
   width: 250px;
-  height: 300px;
+  height: 350px;
   perspective: 1000px;
   position: relative;
   cursor: pointer;
@@ -215,4 +211,51 @@ button:active {
 .logOutButton{
   background-color:rgba(223, 20, 20, 0.808);
   max-height: 75%;
+}
+
+.select {
+  margin-top: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #3a3a3a;
+  border-radius: 8px;
+  background-color: #2d2d2d;
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease; /* Cambiado a 100% para adaptarse */
+  width: 150px;
+  min-width: 125px;
+  height: 40px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  box-sizing: border-box; /* Asegura que padding no afecte el ancho */
+}
+
+/* Efecto hover */
+.select:hover {
+  border-color: #646cff;
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+}
+
+/* Efecto cuando está enfocado */
+.select:focus {
+  border-color: #646cff;
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.3);
+}
+
+/* Estilo para las opciones */
+.select option {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  padding: 10px;
+}
+
+/* Estilo cuando está deshabilitado */
+.select:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }

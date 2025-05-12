@@ -8,7 +8,9 @@ export default function SelectOption({ onChange }) {
   }
   return (
     <div>
-      <select onChange={handleChange}>
+      <select 
+      className='select'
+      onChange={handleChange}>
         <option value="name">Name</option>
         <option value="rating">Rating</option>
         <option value="released">Launch Date</option>

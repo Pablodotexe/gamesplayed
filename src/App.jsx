@@ -5,6 +5,8 @@ import SelectOption from './components/SelectOption';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
+import SavedGamesList from './components/SavedGamesList';
+import { onAuthStateChanged } from "firebase/auth";
 import RegisterForm from './components/SignUpForm'; 
 
 
@@ -16,6 +18,9 @@ import Navbar from './components/Navbar';
 function App() {
   const [data, setData] = useState(null)
   const [option, setOption] = useState("name");
+  const [currentUser, setCurrentUser] = useState(null);
+
+  
 
   useEffect(() => {
     fetch("https://api.rawg.io/api/games?key=624fc12751094f4eb932036f1133fb24")
@@ -69,6 +74,7 @@ function App() {
             <SelectOption onChange={handleOptionChange} />
             <Button handleClick={handleButtonClick} />
             <VideogameCard data={data} />
+            <SavedGamesList />
           </>
         } />
         <Route path="/signup" element={<SignUp />} />
