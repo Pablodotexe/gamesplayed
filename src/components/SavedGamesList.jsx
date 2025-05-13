@@ -1,15 +1,34 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase'; // Ajusta la ruta según tu estructura de carpetas
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { db, auth } from '../firebase';
 
 export default function SavedGamesList() {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Escucha el estado de autenticación
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchGames = async () => {
+      if (!user) {
+        setGames([]); // Limpia juegos al cerrar sesión
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
       try {
-        const querySnapshot = await getDocs(collection(db, "games"));
+        const q = query(collection(db, "games"), where("userId", "==", user.uid));
+        const querySnapshot = await getDocs(q);
         const gamesList = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
@@ -23,9 +42,11 @@ export default function SavedGamesList() {
     };
 
     fetchGames();
-  }, []);
+  }, [user]);
 
   if (loading) return <p>Cargando juegos guardados...</p>;
+
+  if (!user) return <p>Inicia sesión para ver tus juegos guardados.</p>;
 
   return (
     <div className="saved-games-list">

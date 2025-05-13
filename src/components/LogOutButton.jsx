@@ -1,9 +1,11 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
+
 function LogoutButton({ onLogout }) {
   const handleLogout = async () => {
     try {
+      console.log("Usuario actual:", auth.currentUser);
       await signOut(auth);
       console.log("Sesión cerrada correctamente");
       if (onLogout) onLogout(); // callback opcional

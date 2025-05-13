@@ -5,10 +5,8 @@ import SelectOption from './components/SelectOption';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
-import SavedGamesList from './components/SavedGamesList';
-import { onAuthStateChanged } from "firebase/auth";
-import RegisterForm from './components/SignUpForm'; 
-
+import SavedGames from './components/pages/SavedGames';
+//import { onAuthStateChanged } from "firebase/auth";
 
 import './App.css'
 import Navbar from './components/Navbar';
@@ -18,7 +16,7 @@ import Navbar from './components/Navbar';
 function App() {
   const [data, setData] = useState(null)
   const [option, setOption] = useState("name");
-  const [currentUser, setCurrentUser] = useState(null);
+  //const [currentUser, setCurrentUser] = useState(null);
 
   
 
@@ -74,11 +72,12 @@ function App() {
             <SelectOption onChange={handleOptionChange} />
             <Button handleClick={handleButtonClick} />
             <VideogameCard data={data} />
-            <SavedGamesList />
+            
           </>
         } />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/savedgames" element={<SavedGames />} />
       </Routes>
     </div>
     );

@@ -1,4 +1,4 @@
-import React, { useState/*, useEffect */} from 'react';
+import React, { useState/*, useEffect */ } from 'react';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
@@ -60,11 +60,21 @@ function Navbar() {
                 Sign In
               </Link>
             </li>
-
-            {<LogoutButton/>}
+            <li className='nav-item'>
+              <Link
+                to='/savedgames'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                Games Played
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <LogoutButton />
+            </li>
           </ul>
           {/*button && <Button buttonStyle='btn--outline'>SIGN UP</Button>*/}
-          
+
         </div>
       </nav>
     </>
